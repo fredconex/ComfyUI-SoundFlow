@@ -1,0 +1,15 @@
+[project]
+name = "soundflow"
+description = "This is a bunch of nodes for ComfyUI to help with sound work."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["numpy", "torchaudio", "soundfile"]
+
+[project.urls]
+Repository = "https://github.com/fredconex/ComfyUI-SoundFlow"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "conex"
+DisplayName = "ComfyUI-SoundFlow"
+Icon = ""
