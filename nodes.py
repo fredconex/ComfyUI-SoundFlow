@@ -43,7 +43,7 @@ class SoundFlow_FadeNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("faded_audio",)
     FUNCTION = "apply_fade"
-    CATEGORY = "audio"
+    CATEGORY = "SoundFlow"
 
     def _get_samples_from_seconds(self, seconds, sample_rate):
         """Convert seconds to number of samples."""
@@ -124,7 +124,7 @@ class SoundFlow_MixerNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("mixed_audio",)
     FUNCTION = "mix_audio"
-    CATEGORY = "audio"
+    CATEGORY = "SoundFlow"
 
     def _resample_audio(self, waveform, sample_rate_from, sample_rate_to):
         """Resample audio to match the target sample rate."""
@@ -234,7 +234,7 @@ class SoundFlow_SilenceTrimmerNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("trimmed_audio",)
     FUNCTION = "trim_silence"
-    CATEGORY = "audio"
+    CATEGORY = "SoundFlow"
 
     def _amplitude_to_db(self, amplitude):
         """Convert amplitude to decibels"""
@@ -463,7 +463,7 @@ class SoundFlow_ConcatenatorNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("concatenated_audio",)
     FUNCTION = "concatenate_audio"
-    CATEGORY = "audio"
+    CATEGORY = "SoundFlow"
 
     def _create_silence(self, channels, sample_rate, duration_seconds, device):
         """Create a silent audio segment"""
@@ -583,7 +583,7 @@ class SoundFlow_SetLengthNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("audio",)
     FUNCTION = "set_audio_length"
-    CATEGORY = "audio"
+    CATEGORY = "SoundFlow"
 
     def _get_samples_from_seconds(self, seconds, sample_rate):
         """Convert seconds to number of samples."""
@@ -629,10 +629,10 @@ class SoundFlow_GetLengthNode:
     def INPUT_TYPES(cls):
         return {"required": {"audio": ("AUDIO",)}}  # Changed from "AUDIOPATH" to "AUDIO"
 
-    CATEGORY = "AIFSH_XTTS"
     DESCRIPTION = "Outputs the length of the audio file in seconds."
     RETURN_TYPES = ("FLOAT",)
     FUNCTION = "get_audio_length"
+    CATEGORY = "SoundFlow"
 
     def get_audio_length(self, audio):
         if isinstance(audio, dict) and "waveform" in audio and "sample_rate" in audio:
@@ -675,7 +675,7 @@ class SoundFlow_TrimAudioNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("audio",)
     FUNCTION = "trim_audio"
-    CATEGORY = "audio"
+    CATEGORY = "SoundFlow"
 
     def _get_samples_from_seconds(self, seconds, sample_rate):
         """Convert seconds to number of samples."""
@@ -735,7 +735,7 @@ class SoundFlow_SimpleCompressorNode:
     
     RETURN_TYPES = ("AUDIO",)
     FUNCTION = "apply_compression"
-    CATEGORY = "audio/effects"
+    CATEGORY = "SoundFlow"
     
     def apply_compression(self, audio, threshold_db, ratio, attack_ms, release_ms, knee_db, makeup_gain_db, mix):
         if not self.lib_manager.loaded:
@@ -818,7 +818,7 @@ class SoundFlow_DuckCompressorNode:
     
     RETURN_TYPES = ("AUDIO",)
     FUNCTION = "apply_ducking"
-    CATEGORY = "audio/effects"
+    CATEGORY = "SoundFlow"
     
     def apply_ducking(self, main_audio, sidechain_audio, main_gain_db, sidechain_gain_db, 
                       threshold_db, reduction_db, attack_ms, release_ms):
@@ -957,7 +957,7 @@ class SoundFlow_EqualizerNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("audio",)
     FUNCTION = "process_audio"
-    CATEGORY = "Audio/Effects"
+    CATEGORY = "SoundFlow"
 
     def process_audio(self, audio, **kwargs):  # Accept keyword arguments to match new labels
         waveform = audio['waveform'].clone()
@@ -1067,7 +1067,7 @@ class SoundFlow_GainPitchControlNode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("audio",)
     FUNCTION = "process_audio"
-    CATEGORY = "Audio/Effects"
+    CATEGORY = "SoundFlow"
 
 
     def process_audio(self, audio, gain=0.0, pitch=0.0, chunk_size=44100):
@@ -1150,9 +1150,7 @@ class SoundFlow_PreviewAudioNode:
     
     RETURN_TYPES = ()
     FUNCTION = "run"
-    CATEGORY = "SoundFlow/Audio"
-    INPUT_IS_LIST = False
-    OUTPUT_IS_LIST = ()
+    CATEGORY = "SoundFlow"
     OUTPUT_NODE = True
 
     def process_waveform(self, waveform):
